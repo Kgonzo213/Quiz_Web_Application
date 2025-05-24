@@ -1,0 +1,48 @@
+﻿@page
+@model Programowanie_Projekt_Web.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="text-center">
+    <h1 class="welcome">Tworzenie Pytania</h1>
+    <form method="post" enctype="multipart/form-data" class="edit-form">
+        <div class="form-group">
+            <label for="QuestionText">Treść pytania:</label>
+            <textarea id="QuestionText" name="questionText" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="AnswerA">Odpowiedź A:</label>
+            <input type="text" id="AnswerA" name="answerA" class="form-control" required />
+            <label>
+                <input type="checkbox" name="correctAnswers" value="0" /> Poprawna
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="AnswerB">Odpowiedź B:</label>
+            <input type="text" id="AnswerB" name="answerB" class="form-control" required />
+            <label>
+                <input type="checkbox" name="correctAnswers" value="1" /> Poprawna
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="AnswerC">Odpowiedź C:</label>
+            <input type="text" id="AnswerC" name="answerC" class="form-control" required />
+            <label>
+                <input type="checkbox" name="correctAnswers" value="2" /> Poprawna
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="AnswerD">Odpowiedź D:</label>
+            <input type="text" id="AnswerD" name="answerD" class="form-control" required />
+            <label>
+                <input type="checkbox" name="correctAnswers" value="3" /> Poprawna
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="QuestionImage">Obraz pytania (opcjonalnie):</label>
+            <input type="file" id="QuestionImage" name="questionImage" class="form-control" />
+        </div>
+        <button type="submit" class="button-save">Zapisz</button>
+        <a href="/Questions" class="button-cancel">Anuluj</a>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+﻿@page "{id:int}"
+@model Programowanie_Projekt_Web.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="text-center">
+    <h1 class="welcome">Edycja Pytania</h1>
+    <form method="post" enctype="multipart/form-data" class="edit-form">
+        <div class="form-group">
+            <label for="QuestionText">Treść pytania:</label>
+            <textarea id="QuestionText" name="questionText" class="form-control" rows="3" required>@Model.Ask.Question</textarea>
+        </div>
+        @if (Model.Ask.Image != null && Model.Ask.Image.Length > 0)
+        {
+            <div class="form-group">
+                <label>Obecny obraz:</label>
+                <img src="data:image/png;base64,@Convert.ToBase64String(Model.Ask.Image)" alt="Obraz pytania" class="img-thumbnail" style="max-width: 300px;" />
+            </div>
+        }
+        @if (Model.Ask.Answers != null)
+        {
+            @for (int i = 0; i < Model.Ask.Answers.Length; i++)
+            {
+                <div class="form-group">
+                    <label for="Answer@i">Odpowiedź @(i + 1):</label>
+                    <input type="text" id="Answer@i" name="answerContents" class="form-control" value="@Model.Ask.Answers[i]?.Content" required />
+                    <label>
+                        <input type="checkbox" name="correctAnswers" value="@i" @(Model.Ask.Answers[i]?.IsCorrect == 1 ? "checked" : "") /> Poprawna
+                    </label>
+                </div>
+            }
+        }
+        <div class="form-group">
+            <label for="QuestionImage">Obraz pytania (opcjonalnie):</label>
+            <input type="file" id="QuestionImage" name="questionImage" class="form-control" />
+        </div>
+        <button type="submit" class="button-save">Zapisz</button>
+        <a href="/Questions" class="button-cancel">Anuluj</a>
+    </form>
+</div>

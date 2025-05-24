@@ -1,0 +1,36 @@
+﻿@page
+@model Programowanie_Projekt_Web.Pages.QuestionsModel
+@{
+    ViewData["Title"] = "Menagment_Questions";
+}
+
+<div class="text-center">
+    <h1 class="welcome">Zarządzanie Pytaniami</h1>
+    <div class="add-question-button">
+        <a asp-area="" asp-page="/Create" class="button-add">Dodaj nowe pytanie</a>
+    </div>
+    <div class="table-center">
+        <table class="question-table">
+            <tr>
+                <th>ID</th>
+                <th>Treść</th>
+                <th>Akcje</th>
+            </tr>
+            @foreach (var question in Model.Questions)
+            {
+                <tr>
+                    <td>@question.Id</td>
+                    <td>@question.Question</td>
+                    <td>
+                        <a asp-area="" asp-page="/Edit" asp-route-id="@question.Id">
+                            <button class="button-edit">Edytuj</button>
+                        </a>
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@question.Id" style="display:inline;">
+                            <button type="submit" class="button-delete">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

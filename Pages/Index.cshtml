@@ -1,0 +1,21 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="welcome">Witaj! <br> Chcesz zagrać?</h1>
+
+
+
+
+   <ul>
+       <li><h2>Wybierz jedną z opcji:</h2></li>
+       <a asp-area="" asp-page="/Game"> <li><button class="button-menu">Graj</button></li> </a>
+	   <a asp-area="" asp-page="/Rules"> <li><button class="button-menu">Zasady Gry</button></li> </a>
+       <a asp-area="" asp-page="/Leaderboard"> <li><button class="button-menu">Tablica Wyników</button></li> </a>
+       
+   </ul>
+   
+</div>

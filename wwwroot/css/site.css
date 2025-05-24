@@ -1,0 +1,291 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 0%;
+    font-family: Italic;
+    background-image: url("background.png");
+}
+
+li{
+    list-style-type: none;
+}
+
+.button-menu {
+   width: 100%; 
+   max-width: 300px; 
+   background-color: #1b6ec2;
+   color: white;
+   font-family: Arial;
+   font-size: 150%;
+   font-weight: bold;
+   text-align: center;
+   padding: 10px;
+   margin: 10px auto; 
+   text-decoration: none;
+   border-radius: 20px;
+   border: 0px;
+}
+
+.button-menu:hover {
+   background-color: #258cfb;
+}
+
+.button-menu:active {
+   background-color: #1b6ec2;
+}
+
+@media (min-width: 768px) {
+   .button-menu {
+       width: 20%; 
+   }
+}
+
+.welcome{
+    font-size:400%;
+    font-family: Italic;
+    margin: 5%;
+    
+}
+
+.li-num{
+    list-style-type: arabic;
+    font-family: Italic;
+    font-size: 200%;
+}
+
+.table-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5% auto; 
+}
+
+.question-table {
+    border: 2px solid black; 
+    border-collapse: collapse;
+    font-size: 1.5rem; 
+    width: 80%; 
+    background-color: #f9f9f9; 
+    text-align: center; 
+}
+
+.question-table th, .question-table td {
+    border: 1px solid black; 
+    padding: 1%; 
+}
+
+.question-table th {
+    background-color: #1b6ec2; 
+    color: white; 
+    font-weight: bold; 
+}
+
+.button-edit {
+    background-color: #4CAF50; 
+    color: white;
+    padding: 2% 2%;
+    text-decoration: none;
+    border-radius: 5px;
+    border:0px;
+   
+}
+
+.button-edit:hover {
+    background-color: #45a049;
+}
+
+.button-delete {
+    background-color: #f44336; 
+    color: white;
+    padding: 2% 3%;
+    text-decoration: none;
+    border-radius: 5px;
+    border:0px;
+}
+
+.button-delete:hover {
+    background-color: #d32f2f;
+}
+
+
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5% auto;
+    padding: 2%;
+    border: 2px solid #1b6ec2;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 60%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.question-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.question-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.question-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.answers-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.answer-option {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: #e6f2ff;
+    padding: 10px;
+    border: 1px solid #1b6ec2;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.answer-option:hover {
+    background-color: #cce6ff;
+}
+
+.answer-option input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.button-next {
+    display: inline-block;
+    background-color: #1b6ec2;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+    
+}
+    .button-next:hover {
+        background-color: #258cfb
+        
+    }
+a:hover{
+    color:white;
+}
+
+
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    width: 50%;
+    padding: 20px;
+    border: 2px solid #1b6ec2;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.edit-form .form-group {
+    width: 100%;
+    text-align: left;
+}
+
+.edit-form label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.edit-form .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-save {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-save:hover {
+    background-color: #45a049;
+}
+
+.button-cancel {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button-cancel:hover {
+    background-color: #d32f2f;
+}
+
+.button-add {
+    display: inline-block;
+    background-color: #4CAF50; 
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.button-add:hover {
+    background-color: #45a049;
+}

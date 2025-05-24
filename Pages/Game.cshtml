@@ -1,0 +1,32 @@
+﻿@page
+@model Programowanie_Projekt_Web.Pages.GameModel
+@{
+	ViewData["Title"] = "Game";
+}
+<div class="quiz-container">
+    <div class="question-section">
+        <img src="example.jpg" alt="Obraz do pytania" class="question-image" />
+        <p class="question-text">Treść pytania pojawi się tutaj.</p>
+    </div>
+    <div class="answers-section">
+        <label class="answer-option">
+            <input type="checkbox" name="answer" value="A" />
+            A. Odpowiedź A
+        </label>
+        <label class="answer-option">
+            <input type="checkbox" name="answer" value="B" />
+            B. Odpowiedź B
+        </label>
+        <label class="answer-option">
+            <input type="checkbox" name="answer" value="C" />
+            C. Odpowiedź C
+        </label>
+        <label class="answer-option">
+            <input type="checkbox" name="answer" value="D" />
+            D. Odpowiedź D
+        </label>
+    </div>
+    <div class="next-question-section">
+        <a class="button-next" href="/Game?questionId=2">Następne pytanie</a>
+    </div>
+</div>
