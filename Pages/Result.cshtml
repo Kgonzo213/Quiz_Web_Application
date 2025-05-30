@@ -1,0 +1,16 @@
+﻿@page
+@model Programowanie_Projekt_Web.Pages.ResultModel
+@{
+    ViewData["Title"] = "Result";
+}
+<div class="text-center">
+    <h1 class="welcome">Twój wynik: @Model.Score</h1>
+    <form method="post" class="edit-form">
+        <div class="form-group">
+            <label for="UserName">Podaj swoją nazwę:</label>
+            <input type="text" id="UserName" name="UserName" class="form-control" required />
+        </div>
+        <button type="submit" class="button-save">Zapisz wynik</button>
+        <a href="/Index" class="button-cancel">Powrót</a>
+    </form>
+</div>
