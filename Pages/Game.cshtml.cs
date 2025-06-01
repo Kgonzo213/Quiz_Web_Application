@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using Programowanie_Projekt_Web.Model;
 using Programowanie_Projekt_Web.Repo;
 using System.Collections.Generic;
@@ -17,71 +19,93 @@ namespace Programowanie_Projekt_Web.Pages
             _askRepos = askRepos;
         }
 
-        public List<Ask> Questions { get; set; }
-        public int CurrentQuestionIndex { get; set; }
-        public int Score { get; set; }
+        public Ask CurrentQuestion { get; set; }
 
         [BindProperty]
-        public int[] SelectedAnswers { get; set; }
+        public List<Ask> Questions { get; set; } // Przechowujemy całą tablicę pytań
 
-        public async Task<IActionResult> OnGetAsync(int questionIndex = 0, int score = 0)
+        [BindProperty]
+        public int Score { get; set; } // Wynik gracza
+
+        [BindProperty]
+        public int[] SelectedAnswers { get; set; } // Wybrane odpowiedzi
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            // Losowanie pytań tylko na początku gry
-            if (questionIndex == 0)
+            // Losowanie pytań na początku gry
+            Questions = (await _askRepos.QuestionsAsync(10)).ToList();
+            if (!Questions.Any())
             {
-                Questions = (await _askRepos.QuestionsAsync(10)).ToList();
-                if (!Questions.Any())
-                {
-                    return RedirectToPage("/Error");
-                }
-
-                TempData["Questions"] = Questions;
-            }
-            else
-            {
-                Questions = TempData["Questions"] as List<Ask>;
-                TempData.Keep("Questions");
+                return RedirectToPage("/Error");
             }
 
-            if (questionIndex >= Questions.Count)
-            {
-                return RedirectToPage("/Result", new { score });
-            }
+            Score = 0;
 
-            CurrentQuestionIndex = questionIndex;
-            Score = score;
+            // Zapisz pytania do sesji
+            HttpContext.Session.SetObject("Questions", Questions);
+
+            // Pobierz pierwsze pytanie
+            CurrentQuestion = Questions[0];
+
             return Page();
         }
 
-        public IActionResult OnPost(int questionIndex, int score)
+        public async Task<IActionResult> OnPostAsync()
         {
-            Questions = TempData["Questions"] as List<Ask>;
-            TempData.Keep("Questions");
+            // Pobierz pytania z sesji
+            Questions = HttpContext.Session.GetObject<List<Ask>>("Questions");
+            if (Questions == null || !Questions.Any())
+            {
+                return RedirectToPage("/Error");
+            }
 
-            var currentQuestion = Questions[questionIndex];
+            // Pobierz aktualne pytanie
+            CurrentQuestion = Questions[0];
 
-            // Obliczanie wyniku
-            foreach (var answer in currentQuestion.Answers)
+            // Oblicz wynik
+            foreach (var answer in CurrentQuestion.Answers)
             {
                 if (SelectedAnswers.Contains(answer.Id) && answer.IsCorrect == 1)
                 {
-                    score++;
+                    Score++;
                 }
                 else if (SelectedAnswers.Contains(answer.Id) && answer.IsCorrect == 0)
                 {
-                    score--;
+                    Score--;
                 }
             }
 
-            questionIndex++;
+            // Usuń aktualne pytanie z listy
+            Questions.RemoveAt(0);
 
-            // Jeśli to było ostatnie pytanie, przejdź do strony wyników
-            if (questionIndex >= Questions.Count)
+            // Zaktualizuj pytania w sesji
+            HttpContext.Session.SetObject("Questions", Questions);
+
+            // Jeśli lista pytań jest pusta, przejdź do strony wyników
+            if (!Questions.Any())
             {
-                return RedirectToPage("/Result", new { score });
+                return RedirectToPage("/Result", new { score = Score });
             }
 
-            return RedirectToPage("/Game", new { questionIndex, score });
+            // Pobierz następne pytanie
+            CurrentQuestion = Questions[0];
+
+            return Page();
+        }
+
+    }
+
+    public static class SessionExtensions
+    {
+        public static void SetObject<T>(this ISession session, string key, T value)
+        {
+            session.SetString(key, JsonConvert.SerializeObject(value));
+        }
+
+        public static T GetObject<T>(this ISession session, string key)
+        {
+            var value = session.GetString(key);
+            return value == null ? default : JsonConvert.DeserializeObject<T>(value);
         }
     }
 }

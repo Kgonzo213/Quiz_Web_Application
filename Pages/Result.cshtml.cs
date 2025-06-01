@@ -24,7 +24,7 @@ namespace Programowanie_Projekt_Web.Pages
         {
             if (string.IsNullOrWhiteSpace(UserName))
             {
-                ModelState.AddModelError(nameof(UserName), "Nazwa uøytkownika jest wymagana.");
+                ModelState.AddModelError(nameof(UserName), "Nazwa u≈ºytkownika jest wymagana.");
                 return Page();
             }
 

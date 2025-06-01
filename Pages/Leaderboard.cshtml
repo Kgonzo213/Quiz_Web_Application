@@ -1,29 +1,28 @@
 ﻿@page
 @model Programowanie_Projekt_Web.Pages.LeaderboardModel
 @{
-	ViewData["Title"] = "Leaderboard";
+    ViewData["Title"] = "Leaderboard";
 }
 <div class="text-center">
     <h1 class="welcome">Tablica Wyników</h1>
     <div class="table-center">
         <table class="question-table">
             <tr>
-                <th>ID</th>
+                <th>Pozycja</th>
                 <th>Nazwa</th>
                 <th>Punkty</th>
+                <th>Liczba Pytań</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Gracz1</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Gracz2</td>
-                <td>200</td>
-            </tr>
+            @for (int i = 0; i < Model.Leaderboard.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model.Leaderboard[i].Name</td>
+                    <td>@Model.Leaderboard[i].Score</td>
+                    <td>@Model.Leaderboard[i].NumberOfQuestions</td>
+                </tr>
+            }
         </table>
-
-	</div>
+    </div>
     <a asp-area="" asp-page="/Index"> <button class="button-menu">Powrót</button></a>
 </div>

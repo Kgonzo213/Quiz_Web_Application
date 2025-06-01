@@ -12,7 +12,7 @@ namespace Programowanie_Projekt_Web.Repo
         Task<bool> UpdateAskAsync(Ask ask);
         Task<Ask[]> QuestionsAsync(int numberOfQuestions);
         Task<bool> AddScoreAsync(int score, int numberOfQuestions, string name);
-        Task<string[]> ShowScoresAsync();
+        Task<List<string>> GetLeaderboardAsync();
         Task<List<Ask>> ShowQuestionsAsync();
         Task<Ask?> GetAskAsync(int id);
     }
