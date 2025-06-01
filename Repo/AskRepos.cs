@@ -147,8 +147,10 @@ namespace Programowanie_Projekt_Web.Repo
                     allIds.Add(reader.GetInt32(0));
             }
 
-            if (allIds.Count == 0 || numberOfQuestions > allIds.Count)
+            if (allIds.Count == 0)
                 return askList.ToArray();
+            if (numberOfQuestions > allIds.Count)
+                numberOfQuestions = allIds.Count;
 
             var rnd = new Random();
             var usedIds = new HashSet<int>();
@@ -221,26 +223,25 @@ namespace Programowanie_Projekt_Web.Repo
             return true;
         }
 
-        public async Task<string[]> ShowScoresAsync()
-        {
-            var scores = new string[6];
-            if (!isDbExist())
-                createDb();
+        public async Task<List<string>> GetLeaderboardAsync()
+{
+    var scores = new List<string>();
+    if (!isDbExist())
+        createDb();
 
-            using var connection = new SqliteConnection(connectionString);
-            await connection.OpenAsync();
+    using var connection = new SqliteConnection(connectionString);
+    await connection.OpenAsync();
 
-            using var command = connection.CreateCommand();
-            command.CommandText = "SELECT Score, Name, NOF FROM Scores ORDER BY Score DESC LIMIT 6";
-            using var reader = await command.ExecuteReaderAsync();
-            int i = 0;
-            while (await reader.ReadAsync() && i < 6)
-            {
-                scores[i] = $"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetInt32(2)} ";
-                i++;
-            }
-            return scores;
-        }
+    using var command = connection.CreateCommand();
+    command.CommandText = "SELECT Score, Name, NOF FROM Scores ORDER BY Score DESC LIMIT 10";
+    using var reader = await command.ExecuteReaderAsync();
+    while (await reader.ReadAsync())
+    {
+        scores.Add($"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetInt32(2)}");
+    }
+
+    return scores;
+}
 
         public async Task<List<Ask>> ShowQuestionsAsync()
         {

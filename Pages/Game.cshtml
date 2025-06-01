@@ -2,19 +2,18 @@
 @model Programowanie_Projekt_Web.Pages.GameModel
 @{
     ViewData["Title"] = "Game";
-    var question = Model.Questions[Model.CurrentQuestionIndex];
 }
 <div class="quiz-container">
     <div class="question-section">
-        @if (question.Image != null && question.Image.Length > 0)
+        @if (Model.CurrentQuestion.Image != null && Model.CurrentQuestion.Image.Length > 0)
         {
-            <img src="@Programowanie_Projekt_Web.Model.Utility.ByteArrayToBase64Image(question.Image)" alt="Obraz do pytania" class="question-image" />
+            <img src="@Programowanie_Projekt_Web.Model.Utility.ByteArrayToBase64Image(Model.CurrentQuestion.Image)" alt="Obraz do pytania" class="question-image" />
         }
-        <p class="question-text">@question.Question</p>
+        <p class="question-text">@Model.CurrentQuestion.Question</p>
     </div>
     <form method="post">
         <div class="answers-section">
-            @foreach (var answer in question.Answers)
+            @foreach (var answer in Model.CurrentQuestion.Answers)
             {
                 <label class="answer-option">
                     <input type="checkbox" name="SelectedAnswers" value="@answer.Id" />
@@ -22,8 +21,7 @@
                 </label>
             }
         </div>
-        <input type="hidden" name="questionIndex" value="@Model.CurrentQuestionIndex" />
-        <input type="hidden" name="score" value="@Model.Score" />
+        <input type="hidden" name="Score" value="@Model.Score" />
         <button type="submit" class="button-next">Następne pytanie</button>
     </form>
 </div>
