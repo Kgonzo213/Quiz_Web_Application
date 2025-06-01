@@ -36,7 +36,7 @@ namespace Programowanie_Projekt_Web.Pages
             Questions = (await _askRepos.QuestionsAsync(10)).ToList();
             if (!Questions.Any())
             {
-                return RedirectToPage("/Error");
+                return RedirectToPage("/index");
             }
 
             Score = 0;
@@ -56,7 +56,7 @@ namespace Programowanie_Projekt_Web.Pages
             Questions = HttpContext.Session.GetObject<List<Ask>>("Questions");
             if (Questions == null || !Questions.Any())
             {
-                return RedirectToPage("/Error");
+                return RedirectToPage("/index");
             }
 
             // Pobierz aktualne pytanie
